@@ -1,0 +1,121 @@
+/* main.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #020617, #020617 40%, #000000 100%);
+  color: #f9fafb;
+}
+
+/* Para que el contenido no vaya pegado a los bordes en mobile */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}
+
+/* Limitar ancho del contenido central */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+/* Helpers */
+.text-center {
+  text-align: center;
+}
+.mt-0 {
+  margin-top: 0;
+}
+.mb-0 { 
+  margin-bottom: 0;
+}           
+
+.product-form-dark label {
+  color: #f1f5f9 !important;
+}
+
+.product-form-dark .form-control,
+.product-form-dark textarea,
+.product-form-dark input,
+.product-form-dark select {
+  background-color: #0f172a !important; 
+  color: #f8fafc !important; 
+  border: 1px solid #334155 !important;
+}
+
+.product-form-dark .form-control::placeholder {
+  color: #94a3b8 !important;
+}
+
+.product-form-dark .invalid-feedback {
+  color: #fca5a5 !important;
+}
+
+.product-form-dark button.btn-primary {
+  background-color: #2563eb !important;
+  border-color: #1d4ed8 !important;
+}
+
+
+/* ------------------------------- */
+/* TEXTOS BLANCOS EN FONDOS OSCUROS */
+/* ------------------------------- */
+
+/* Aplica a todo el admin, login, register, etc */
+body, 
+.app-main,
+.main-container,
+.dark-page {
+  color: #f8fafc !important; /* blanco suave */
+}
+
+/* Asegurar que todos los títulos sean blancos */
+.dark-page h1,
+.dark-page h2,
+.dark-page h3,
+.dark-page h4,
+.dark-page h5,
+.dark-page h6,
+.dark-page p,
+.dark-page span,
+.dark-page label,
+.dark-page a {
+  color: #f8fafc !important;
+}
+
+/* Inputs dentro de páginas oscuras */
+.dark-page input,
+.dark-page select,
+.dark-page textarea {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+}
+
+.dark-page input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Botones */
+.dark-page .btn-primary {
+  background-color: #2563eb !important;
+  border-color: #1d4ed8 !important;
+  color: #fff !important;
+}
+
+.dark-page .btn-outline-dark {
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}

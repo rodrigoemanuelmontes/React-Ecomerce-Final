@@ -1,0 +1,244 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Remera Rock Los Redondos ",
+      "price": 15000,
+      "description": "Remera algodón, diseño banda de rock, cómoda y liviana.",
+      "category": "Ropa",
+      "image": "https://imgs.search.brave.com/RCNBR4yoIWn0izua63nhPS3A1nX1Pnz3a3kzL56cWGA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRw/Mi5tbHN0YXRpYy5j/b20vRF9RX05QXzJY/XzcyMzkzMS1NTEE3/NDk4NTY1NzIzOF8w/MzIwMjQtRS53ZWJw"
+    },
+    {
+      "id": "2",
+      "name": "Vinilo Clásico",
+      "description": "Edición remasterizada en vinilo 180g. Excelente calidad de audio.",
+      "price": 4200,
+      "category": "Música",
+      "image": "https://images.pexels.com/photos/164745/pexels-photo-164745.jpeg"
+    },
+    {
+      "id": "3",
+      "name": "Auriculares",
+      "description": "Auriculares con cancelación de ruido y micrófono integrado.",
+      "price": 8000,
+      "category": "Audio",
+      "image": "https://images.pexels.com/photos/3394664/pexels-photo-3394664.jpeg"
+    },
+    {
+      "id": "4",
+      "name": "Zapatillas Urbanas",
+      "description": "Zapatillas urbanas negras, suela de goma y diseño minimalista.",
+      "price": 13500,
+      "category": "Calzado",
+      "image": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg"
+    },
+    {
+      "id": "5",
+      "name": "Buzo Oversize",
+      "description": "Buzo de frisa liviana, ideal para media estación, corte oversize.",
+      "price": 9200,
+      "category": "Ropa",
+      "image": "https://images.pexels.com/photos/7671166/pexels-photo-7671166.jpeg"
+    },
+    {
+      "id": "6",
+      "name": "Campera de Cuero",
+      "description": "Campera de eco cuero negra, estilo biker, forrada internamente.",
+      "price": 26900,
+      "category": "Ropa",
+      "image": "https://images.pexels.com/photos/1036856/pexels-photo-1036856.jpeg"
+    },
+    {
+      "id": "7",
+      "name": "Gorra Snapback",
+      "description": "Gorra negra regulable, logo bordado en relieve.",
+      "price": 3800,
+      "category": "Accesorios",
+      "image": "https://images.pexels.com/photos/951047/pexels-photo-951047.jpeg"
+    },
+    {
+      "id": "8",
+      "name": "Mochila Minimal",
+      "description": "Mochila negra, compartimento para notebook y bolsillos internos.",
+      "price": 11200,
+      "category": "Accesorios",
+      "image": "https://images.pexels.com/photos/3747468/pexels-photo-3747468.jpeg"
+    },
+    {
+      "id": "9",
+      "name": "Lámpara LED de Escritorio",
+      "description": "Lámpara LED con brazo flexible y tres temperaturas de luz.",
+      "price": 6200,
+      "category": "Hogar",
+      "image": "https://images.pexels.com/photos/8092374/pexels-photo-8092374.jpeg"
+    },
+    {
+      "id": "10",
+      "name": "Teclado Mecánico",
+      "description": "Teclado mecánico compacto, switches rojos y retroiluminación blanca.",
+      "price": 18900,
+      "category": "Tecnología",
+      "image": "https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg"
+    },
+    {
+      "id": "11",
+      "name": "Mouse Gamer",
+      "description": "Mouse gamer ergonómico, 7200 DPI, 6 botones programables.",
+      "price": 8500,
+      "category": "Tecnología",
+      "image": "https://images.pexels.com/photos/845255/pexels-photo-845255.jpeg"
+    },
+    {
+      "id": "12",
+      "name": "Mousepad XL",
+      "description": "Mousepad extendido, superficie de tela, base antideslizante.",
+      "price": 3900,
+      "category": "Tecnología",
+      "image": "https://images.pexels.com/photos/3944394/pexels-photo-3944394.jpeg"
+    },
+    {
+      "id": "13",
+      "name": "Parlante Bluetooth",
+      "description": "Parlante portátil resistente a salpicaduras, batería de 12 horas.",
+      "price": 14500,
+      "category": "Audio",
+      "image": "https://images.pexels.com/photos/3747036/pexels-photo-3747036.jpeg"
+    },
+    {
+      "id": "14",
+      "name": "Smartwatch Minimal",
+      "description": "Reloj inteligente con monitoreo de pasos, ritmo cardíaco y notificaciones.",
+      "price": 22000,
+      "category": "Tecnología",
+      "image": "https://images.pexels.com/photos/2773940/pexels-photo-2773940.jpeg"
+    },
+    {
+      "id": "15",
+      "name": "Cuadro Decorativo",
+      "description": "Cuadro abstracto en blanco y negro, marco de madera negro.",
+      "price": 5100,
+      "category": "Hogar",
+      "image": "https://images.pexels.com/photos/1251173/pexels-photo-1251173.jpeg"
+    },
+    {
+      "id": "16",
+      "name": "Almohadón Geométrico",
+      "description": "Almohadón con funda desmontable, diseño geométrico minimal.",
+      "price": 2800,
+      "category": "Hogar",
+      "image": "https://images.pexels.com/photos/1439965/pexels-photo-1439965.jpeg"
+    },
+    {
+      "id": "17",
+      "name": "Taza Cerámica Negra",
+      "description": "Taza de cerámica negra matte, apta microondas y lavavajillas.",
+      "price": 1700,
+      "category": "Hogar",
+      "image": "https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg"
+    },
+    {
+      "id": "18",
+      "name": "Notebook Backpack Pro",
+      "description": "Mochila para notebook de hasta 15.6\", bolsillos ocultos y puerto USB.",
+      "price": 18400,
+      "category": "Accesorios",
+      "image": "https://images.pexels.com/photos/3762800/pexels-photo-3762800.jpeg"
+    },
+    {
+      "id": "19",
+      "name": "Set de Cuadernos",
+      "description": "Pack de 3 cuadernos lisos A5, tapas negras minimalistas.",
+      "price": 3200,
+      "category": "Papelería",
+      "image": "https://images.pexels.com/photos/3769747/pexels-photo-3769747.jpeg"
+    },
+    {
+      "id": "20",
+      "name": "Bolígrafo Metálico",
+      "description": "Bolígrafo negro de cuerpo metálico, trazo suave, recargable.",
+      "price": 1400,
+      "category": "Papelería",
+      "image": "https://images.pexels.com/photos/461078/pexels-photo-461078.jpeg"
+    },
+    {
+      "id": "21",
+      "name": "Remera Básica Negra",
+      "description": "Remera de algodón peinado, corte regular, color negro.",
+      "price": 2900,
+      "category": "Ropa",
+      "image": "https://images.pexels.com/photos/6311655/pexels-photo-6311655.jpeg"
+    },
+    {
+      "id": "22",
+      "name": "Pantalón Jogger",
+      "description": "Jogger negro con puño, tela liviana y cintura elastizada.",
+      "price": 8700,
+      "category": "Ropa",
+      "image": "https://images.pexels.com/photos/6311576/pexels-photo-6311576.jpeg"
+    },
+    {
+      "id": "23",
+      "name": "Camisa Negra Slim",
+      "description": "Camisa manga larga, corte slim fit, ideal para look urbano elegante.",
+      "price": 11800,
+      "category": "Ropa",
+      "image": "https://images.pexels.com/photos/7697325/pexels-photo-7697325.jpeg"
+    },
+    {
+      "id": "24",
+      "name": "Vinilo Edición Especial",
+      "description": "Vinilo doble, edición limitada con booklet y arte exclusivo.",
+      "price": 9800,
+      "category": "Música",
+      "image": "https://images.pexels.com/photos/3747562/pexels-photo-3747562.jpeg"
+    },
+    {
+      "id": "25",
+      "name": "Auriculares In Ear",
+      "description": "Auriculares in ear con cable reforzado y buen aislamiento de ruido.",
+      "price": 4300,
+      "category": "Audio",
+      "image": "https://images.pexels.com/photos/7163952/pexels-photo-7163952.jpeg"
+    },
+    {
+      "id": "26",
+      "name": "Barra de Sonido",
+      "description": "Barra de sonido compacta para PC o TV, conexión Bluetooth y AUX.",
+      "price": 23300,
+      "category": "Audio",
+      "image": "https://images.pexels.com/photos/3760742/pexels-photo-3760742.jpeg"
+    },
+    {
+      "id": "27",
+      "name": "Luz LED Ambiente",
+      "description": "Tira LED RGB con control remoto, ideal para setup gamer.",
+      "price": 5600,
+      "category": "Tecnología",
+      "image": "https://images.pexels.com/photos/3394667/pexels-photo-3394667.jpeg"
+    },
+    {
+      "id": "28",
+      "name": "Organizador de Cables",
+      "description": "Set de sujetacables de silicona para escritorios y setups limpios.",
+      "price": 1900,
+      "category": "Accesorios",
+      "image": "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg"
+    },
+    {
+      "id": "29",
+      "name": "Soporte para Notebook",
+      "description": "Soporte regulable para notebook, mejora postura y ventilación.",
+      "price": 7400,
+      "category": "Tecnología",
+      "image": "https://images.pexels.com/photos/5054213/pexels-photo-5054213.jpeg"
+    },
+    {
+      "id": "30",
+      "name": "Silla de Escritorio",
+      "description": "Silla ergonómica, respaldo de malla, regulación de altura.",
+      "price": 52900,
+      "category": "Hogar",
+      "image": "https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg"
+    }
+  ]
+}
