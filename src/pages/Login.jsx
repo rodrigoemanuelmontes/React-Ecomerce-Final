@@ -64,7 +64,7 @@ export default function Login() {
 
             {/* Este texto ahora será blanco */}
             <p className="mt-3 small">
-              Login simulado: cualquier email y password funcionan.
+              Para solicitar credenciales enviar email a: rodrigomontes167@gmail.com
             </p>
           </div>
         </div>

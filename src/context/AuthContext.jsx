@@ -10,14 +10,19 @@ export const AuthProvider = ({ children }) => {
     if (s) setUser(JSON.parse(s));
   }, []);
 
-  const login = (email, password) => {
-    // Simulated login: accept any non-empty email/password
-    if (!email || !password) return { ok: false, message: "Credenciales inválidas" };
+ const login = (email, password) => {
+  const EMAIL_VALIDO = "rodrigomontes167@gmail.com";
+  const PASSWORD_VALIDO = "React2025!";
+
+  if (email === EMAIL_VALIDO && password === PASSWORD_VALIDO) {
     const u = { email };
     setUser(u);
     localStorage.setItem("user", JSON.stringify(u));
     return { ok: true };
-  };
+  }
+
+  return { ok: false, message: "Email o contraseña incorrectos" };
+};
 
   const logout = () => {
     setUser(null);
