@@ -1,10 +1,12 @@
 // src/context/CartContext.jsx
 import React, { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "./AuthContext"; // 👈 importar AuthContext
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
+  const { isAuthenticated } = useAuth(); // 👈 obtener estado de login
   const [cart, setCart] = useState([]);
 
   // 👉 Función global de toast
@@ -12,8 +14,13 @@ export function CartProvider({ children }) {
     toast[type](msg);
   };
 
-  // 👉 Agregar al carrito (si existe suma cantidad)
+  // 👉 Agregar al carrito (solo si está logueado)
   const addToCart = (product) => {
+    if (!isAuthenticated) {
+      showToast("Debes iniciar sesión para agregar productos al carrito", "error");
+      return;
+    }
+
     setCart((prev) => {
       const exists = prev.find((p) => p.id === product.id);
       if (exists) {
