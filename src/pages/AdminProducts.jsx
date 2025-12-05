@@ -13,12 +13,17 @@ export default function AdminProducts() {
   const handleEdit = (product) => setEditingProduct(product);
   const handleNew = () => setEditingProduct(null);
 
+  // ✅ BASE DINÁMICA: LOCAL vs VERCEL
+ const BASE_URL = "https://69319dc911a8738467cfc466.mockapi.io/products";
+
+
+  // ✅ CREAR / EDITAR
   const handleSubmit = async (data) => {
     const isEditing = !!(editingProduct && editingProduct.id);
 
     const url = isEditing
-      ? `http://localhost:4000/products/${editingProduct.id}`
-      : "http://localhost:4000/products";
+      ? `${BASE_URL}/${editingProduct.id}`
+      : BASE_URL;
 
     const method = isEditing ? "PUT" : "POST";
 
@@ -31,11 +36,15 @@ export default function AdminProducts() {
         body: JSON.stringify(data),
       });
 
+      if (!res.ok) throw new Error("Error al guardar");
+
       const savedProduct = await res.json();
 
       setProducts((prev) => {
         if (isEditing) {
-          return prev.map((p) => (p.id === savedProduct.id ? savedProduct : p));
+          return prev.map((p) =>
+            p.id === savedProduct.id ? savedProduct : p
+          );
         }
         return [...prev, savedProduct];
       });
@@ -47,7 +56,6 @@ export default function AdminProducts() {
           ? "Producto actualizado correctamente"
           : "Producto creado correctamente"
       );
-
     } catch (err) {
       console.error("Error guardando producto", err);
       showToast("Error al guardar el producto");
@@ -56,6 +64,7 @@ export default function AdminProducts() {
     }
   };
 
+  // ✅ ELIMINAR
   const handleDelete = async (id) => {
     if (!id) return showToast("Producto sin ID válido");
 
@@ -64,7 +73,7 @@ export default function AdminProducts() {
     try {
       setSaving(true);
 
-      const res = await fetch(`http://localhost:4000/products/${id}`, {
+      const res = await fetch(`${BASE_URL}/${id}`, {
         method: "DELETE",
       });
 
@@ -77,7 +86,6 @@ export default function AdminProducts() {
       }
 
       showToast("Producto eliminado correctamente");
-
     } catch (err) {
       console.error("Error eliminando", err);
       showToast("Error al eliminar el producto");
@@ -87,7 +95,7 @@ export default function AdminProducts() {
   };
 
   return (
-    <div className="dark-page">       {/*  ⬅  ESTA ES LA CLASE CLAVE  */}
+    <div className="dark-page">
       <div className="container py-4">
         <div className="row">
 
@@ -125,7 +133,7 @@ export default function AdminProducts() {
             <ul className="list-group">
               {products.map((p) => (
                 <li
-                  key={p.id || Math.random()}
+                  key={p.id}
                   className="list-group-item d-flex justify-content-between align-items-center"
                 >
                   <div>
@@ -160,6 +168,7 @@ export default function AdminProducts() {
               )}
             </ul>
           </div>
+
         </div>
       </div>
     </div>
