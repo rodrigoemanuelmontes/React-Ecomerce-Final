@@ -8,7 +8,7 @@ import { CartProvider } from "./context/CartContext";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Helmet } from "react-helmet-async";
 import Footer from "./components/Footer";
-import Nav from "./components/Navbar";
+import Nav from "./components/Navbarfix";
 import "./main.css";
 
 export default function App() {

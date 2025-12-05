@@ -3,19 +3,22 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 
-export default function Nav() {
+export default function Navbar() {
   const { isAuthenticated, logout, user, isAdmin } = useAuth();
   const { cartCount } = useCart();
 
   const [hideOnScroll, setHideOnScroll] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  // 🚨 Protegemos el uso de window para SSR
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      if (window.innerWidth >= 768) return;
-      if (isOpen) return; // ✅ SI EL MENÚ ESTÁ ABIERTO NO SE OCULTA
+      if (window.innerWidth >= 768) return; // solo móvil
+      if (isOpen) return; // si menú abierto no ocultar
 
       if (window.scrollY > lastScrollY && window.scrollY > 80) {
         setHideOnScroll(true);
@@ -53,7 +56,11 @@ export default function Nav() {
         <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/" onClick={() => setIsOpen(false)}>
+              <NavLink
+                className="nav-link"
+                to="/"
+                onClick={() => setIsOpen(false)}
+              >
                 Home
               </NavLink>
             </li>
