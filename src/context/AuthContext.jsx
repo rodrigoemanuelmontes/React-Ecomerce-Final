@@ -1,41 +1,71 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
+  // ✅ Mantener sesión al refrescar
   useEffect(() => {
-    const s = localStorage.getItem("user");
-    if (s) setUser(JSON.parse(s));
+    const saved = localStorage.getItem("authUser");
+    if (saved) setUser(JSON.parse(saved));
   }, []);
 
- const login = (email, password) => {
-  const EMAIL_VALIDO = "rodrigomontes167@gmail.com";
-  const PASSWORD_VALIDO = "React2025!";
+  // ✅ LOGIN
+  const login = (email, password) => {
+    // ✅ ADMIN FIJO
+    if (
+      email === "rodrigomontes167@gmail.com" &&
+      password === "React2025!"
+    ) {
+      const adminUser = {
+        email,
+        role: "admin",
+      };
 
-  if (email === EMAIL_VALIDO && password === PASSWORD_VALIDO) {
-    const u = { email };
-    setUser(u);
-    localStorage.setItem("user", JSON.stringify(u));
-    return { ok: true };
-  }
+      setUser(adminUser);
+      localStorage.setItem("authUser", JSON.stringify(adminUser));
 
-  return { ok: false, message: "Email o contraseña incorrectos" };
-};
+      return { ok: true, user: adminUser };
+    }
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
+    // ✅ USUARIO NORMAL (cualquiera)
+    if (email && password.length >= 4) {
+      const normalUser = {
+        email,
+        role: "user",
+      };
+
+      setUser(normalUser);
+      localStorage.setItem("authUser", JSON.stringify(normalUser));
+
+      return { ok: true, user: normalUser };
+    }
+
+    return { ok: false, message: "Credenciales inválidas" };
   };
 
-  const isAuthenticated = !!user;
+  // ✅ LOGOUT
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("authUser");
+  };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        isAuthenticated: !!user,
+        isAdmin: user?.role === "admin", // ✅ CLAVE
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  return useContext(AuthContext);
+}

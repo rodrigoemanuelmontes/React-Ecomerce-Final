@@ -1,9 +1,15 @@
-/* main.css */
+/* ========================= */
+/* RESET GENERAL */
+/* ========================= */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
 }
 
 body {
@@ -13,7 +19,11 @@ body {
   color: #f9fafb;
 }
 
-/* Para que el contenido no vaya pegado a los bordes en mobile */
+
+/* ========================= */
+/* LAYOUT GENERAL */
+/* ========================= */
+
 .app-shell {
   min-height: 100vh;
   display: flex;
@@ -24,23 +34,27 @@ body {
   flex: 1;
 }
 
-/* Limitar ancho del contenido central */
-.main-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 3rem;
-}
 
-/* Helpers */
+/* ========================= */
+/* HELPERS */
+/* ========================= */
+
 .text-center {
   text-align: center;
 }
+
 .mt-0 {
   margin-top: 0;
 }
-.mb-0 { 
+
+.mb-0 {
   margin-bottom: 0;
-}           
+}
+
+
+/* ========================= */
+/* FORMULARIOS OSCUROS */
+/* ========================= */
 
 .product-form-dark label {
   color: #f1f5f9 !important;
@@ -50,8 +64,8 @@ body {
 .product-form-dark textarea,
 .product-form-dark input,
 .product-form-dark select {
-  background-color: #0f172a !important; 
-  color: #f8fafc !important; 
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
   border: 1px solid #334155 !important;
 }
 
@@ -69,19 +83,17 @@ body {
 }
 
 
-/* ------------------------------- */
-/* TEXTOS BLANCOS EN FONDOS OSCUROS */
-/* ------------------------------- */
+/* ========================= */
+/* PÁGINAS OSCURAS */
+/* ========================= */
 
-/* Aplica a todo el admin, login, register, etc */
-body, 
-.app-main,
-.main-container,
 .dark-page {
-  color: #f8fafc !important; /* blanco suave */
+  min-height: calc(100vh - 140px);
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: #f8fafc !important;
 }
 
-/* Asegurar que todos los títulos sean blancos */
 .dark-page h1,
 .dark-page h2,
 .dark-page h3,
@@ -95,7 +107,6 @@ body,
   color: #f8fafc !important;
 }
 
-/* Inputs dentro de páginas oscuras */
 .dark-page input,
 .dark-page select,
 .dark-page textarea {
@@ -108,7 +119,6 @@ body,
   color: #94a3b8 !important;
 }
 
-/* Botones */
 .dark-page .btn-primary {
   background-color: #2563eb !important;
   border-color: #1d4ed8 !important;
@@ -118,4 +128,57 @@ body,
 .dark-page .btn-outline-dark {
   color: #f8fafc !important;
   border-color: #475569 !important;
+}
+
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer {
+  width: 100%;
+  background: #0b0b0d;
+  padding: 20px 10px;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.footer-content strong {
+  color: #fff;
+}
+
+
+/* ========================= */
+/* NAVBAR OCULTA AL SCROLL */
+/* ========================= */
+
+.hide-navbar {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.navbar {
+  transition: transform 0.3s ease;
+}
+
+
+/* =============================== */
+/* FIX DEFINITIVO NAVBAR MOBILE */
+/* =============================== */
+
+@media (max-width: 991px) {
+
+  .navbar-collapse {
+    background: #0b0b0d;
+    padding: 15px;
+    border-top: 1px solid #222;
+  }
+
 }

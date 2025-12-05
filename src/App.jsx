@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -8,65 +8,91 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CartProvider, useCart } from "./context/CartContext";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Helmet } from "react-helmet-async";
-import "./main.css"; // asegurate de tener los estilos de la animación
+import Footer from "./components/Footer";
+import "./main.css";
+
+/* ========================= */
+/* NAVBAR ✅ DEFINITIVA */
+/* ========================= */
 
 function Nav() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, logout, user, isAdmin } = useAuth();
   const { cartCount } = useCart();
 
+  const [hideOnScroll, setHideOnScroll] = useState(false);
+  const [expanded, setExpanded] = useState(false); // ✅ controla menú
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      if (window.innerWidth < 768) {
+        if (window.scrollY > lastScrollY && window.scrollY > 80) {
+          setHideOnScroll(true);
+          setExpanded(false); // ✅ CIERRA EL MENÚ AL OCULTARSE
+        } else {
+          setHideOnScroll(false);
+        }
+        lastScrollY = window.scrollY;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav
+      className={`navbar navbar-expand-lg navbar-dark bg-dark sticky-top ${
+        hideOnScroll ? "hide-navbar" : ""
+      }`}
+    >
       <div className="container">
         <Link className="navbar-brand fw-bold text-uppercase" to="/">
           eCommerce
         </Link>
 
+        {/* ✅ BOTÓN HAMBURGUESA */}
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNavbar"
-          aria-controls="mainNavbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          onClick={() => setExpanded(!expanded)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="mainNavbar">
+        {/* ✅ MENÚ CONTROLADO REAL */}
+        <div className={`collapse navbar-collapse ${expanded ? "show" : ""}`}>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
+                className="nav-link"
                 to="/"
-                end
-                className={({ isActive }) =>
-                  "nav-link" + (isActive ? " active fw-semibold" : "")
-                }
+                onClick={() => setExpanded(false)}
               >
                 Home
               </NavLink>
             </li>
 
-            <li className="nav-item">
-              <NavLink
-                to="/cart"
-                className={({ isActive }) =>
-                  "nav-link" + (isActive ? " active fw-semibold" : "")
-                }
-              >
-                Carrito ({cartCount})
-              </NavLink>
-            </li>
+            {isAuthenticated && (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/cart"
+                  onClick={() => setExpanded(false)}
+                >
+                  Carrito ({cartCount})
+                </NavLink>
+              </li>
+            )}
           </ul>
 
-          <div className="d-flex align-items-center gap-2">
-            {isAuthenticated && (
+          <div className="d-flex gap-2 align-items-center">
+            {isAdmin && (
               <NavLink
                 to="/admin"
-                className={({ isActive }) =>
-                  "btn btn-sm " +
-                  (isActive ? "btn-outline-light" : "btn-outline-secondary")
-                }
+                className="btn btn-outline-light btn-sm"
+                onClick={() => setExpanded(false)}
               >
                 Admin
               </NavLink>
@@ -74,18 +100,26 @@ function Nav() {
 
             {isAuthenticated ? (
               <>
-                <span className="text-light small d-none d-md-inline">
-                  {user?.email}
+                <span className="text-light small">
+                  {isAdmin ? "Bienvenido Admin" : user.email}
                 </span>
+
                 <button
-                  className="btn btn-sm btn-outline-danger"
-                  onClick={logout}
+                  className="btn btn-danger btn-sm"
+                  onClick={() => {
+                    logout();
+                    setExpanded(false);
+                  }}
                 >
                   Logout
                 </button>
               </>
             ) : (
-              <Link className="btn btn-sm btn-primary" to="/login">
+              <Link
+                to="/login"
+                className="btn btn-primary btn-sm"
+                onClick={() => setExpanded(false)}
+              >
                 Login
               </Link>
             )}
@@ -96,19 +130,9 @@ function Nav() {
   );
 }
 
-// Toast animado estilo Login
-function Toast() {
-  const { toastMessage } = useCart();
-
-  if (!toastMessage) return null;
-
-  return (
-    <div className="toast-notification">
-      <div className="toast-body">{toastMessage}</div>
-      <div className="toast-progress"></div>
-    </div>
-  );
-}
+/* ========================= */
+/* APP */
+/* ========================= */
 
 export default function App() {
   return (
@@ -117,36 +141,37 @@ export default function App() {
         <BrowserRouter>
           <Helmet>
             <title>eCommerce Final</title>
-            <meta
-              name="description"
-              content="Entrega final - eCommerce Talento Lab"
-            />
           </Helmet>
 
-          <Nav />
-          <Toast />
+          <div className="app-shell">
+            <Nav />
 
-          <div className="container my-4">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/cart"
-                element={
-                  <PrivateRoute>
-                    <CartPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <PrivateRoute>
-                    <AdminProducts />
-                  </PrivateRoute>
-                }
-              />
-            </Routes>
+            <div className="app-main container my-4">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+
+                <Route
+                  path="/cart"
+                  element={
+                    <PrivateRoute>
+                      <CartPage />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  path="/admin"
+                  element={
+                    <PrivateRoute adminOnly>
+                      <AdminProducts />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+            </div>
+
+            <Footer />
           </div>
         </BrowserRouter>
       </CartProvider>

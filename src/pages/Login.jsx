@@ -14,13 +14,33 @@ export default function Login() {
   const handle = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = login(email, password);
-    setLoading(false);
-    if (res.ok) {
-      toast.success("Login correcto");
-      nav("/");
-    } else {
-      toast.error(res.message || "Error al iniciar sesión");
+
+    try {
+      // ✅ AHORA SÍ: con await
+      const res = await login(email.trim(), password);
+
+      if (res?.ok) {
+        const role = res.user?.role;
+        const emailUser = res.user?.email || email;
+
+        // ✅ Mensaje personalizado
+        if (role === "admin") {
+          toast.success("¡Bienvenido Admin!");
+          nav("/admin");
+        } else {
+          toast.success(`Bienvenido ${emailUser}`);
+          nav("/");
+        }
+
+      } else {
+        toast.error(res?.message || "Credenciales inválidas");
+      }
+
+    } catch (err) {
+      console.error(err);
+      toast.error("Error al iniciar sesión");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -30,9 +50,7 @@ export default function Login() {
         <title>Login - eCommerce</title>
       </Helmet>
 
-      {/* ⬅ AGREGAMOS ESTO */}
       <div className="dark-page">
-
         <div className="row justify-content-center">
           <div className="col-12 col-md-6">
             <h3>Login</h3>
@@ -44,6 +62,9 @@ export default function Login() {
                   className="form-control"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  placeholder="email@example.com"
+                  required
                 />
               </div>
 
@@ -54,6 +75,7 @@ export default function Login() {
                   className="form-control"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
 
@@ -62,13 +84,11 @@ export default function Login() {
               </button>
             </form>
 
-            {/* Este texto ahora será blanco */}
-            <p className="mt-3 small">
-              Para solicitar credenciales enviar email a: rodrigomontes167@gmail.com
+            <p className="mt-3 small text-light">
+              Para solicitar credenciales de Administrador enviar mail a: <strong>rodrigomontes167@gmail.com</strong> 
             </p>
           </div>
         </div>
-
       </div>
     </>
   );
