@@ -1,27 +1,39 @@
-function Nav() {
+import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+
+export default function Nav() {
   const { isAuthenticated, logout, user, isAdmin } = useAuth();
   const { cartCount } = useCart();
 
   const [hideOnScroll, setHideOnScroll] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // ✅ estado del menú mobile
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      if (window.innerWidth < 768) {
-        if (window.scrollY > lastScrollY) {
-          setHideOnScroll(true); // bajando → se oculta
-        } else {
-          setHideOnScroll(false); // subiendo → aparece
-        }
-        lastScrollY = window.scrollY;
+      if (window.innerWidth >= 768) return;
+      if (isOpen) return; // ✅ SI EL MENÚ ESTÁ ABIERTO NO SE OCULTA
+
+      if (window.scrollY > lastScrollY && window.scrollY > 80) {
+        setHideOnScroll(true);
+      } else {
+        setHideOnScroll(false);
       }
+
+      lastScrollY = window.scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isOpen]);
+
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+    setHideOnScroll(false);
+  };
 
   return (
     <nav
@@ -34,27 +46,25 @@ function Nav() {
           eCommerce
         </Link>
 
-        {/* ✅ BOTÓN HAMBURGUESA REAL */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="navbar-toggler" type="button" onClick={toggleMenu}>
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* ✅ MENÚ COLAPSABLE REAL */}
         <div className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item" onClick={() => setIsOpen(false)}>
-              <NavLink className="nav-link" to="/">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/" onClick={() => setIsOpen(false)}>
                 Home
               </NavLink>
             </li>
 
             {isAuthenticated && (
-              <li className="nav-item" onClick={() => setIsOpen(false)}>
-                <NavLink className="nav-link" to="/cart">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  to="/cart"
+                  onClick={() => setIsOpen(false)}
+                >
                   Carrito ({cartCount})
                 </NavLink>
               </li>
@@ -77,6 +87,7 @@ function Nav() {
                 <span className="text-light small">
                   {isAdmin ? "Bienvenido Admin" : user.email}
                 </span>
+
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() => {
